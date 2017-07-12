@@ -1,0 +1,64 @@
+{% extends 'admin/layout.html' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block page_head %}
+    <div class="page-head">
+                <h3 class="m-b-less">
+                    添加项目
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">项目</a></li>
+                        <li class="active">添加项目</li>
+                    </ol>
+                </div>
+    </div>
+
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="panel panel-default">
+        	<div class="panel-body col-md-8">
+                <form action="{{ url_for('project.add_project') }}" method="post" class="form-horizontal">
+                    {% with messages = get_flashed_messages() %}
+                          {% if messages %}
+
+                              {% for message in messages %}
+                                 <div class="alert alert-warning">
+                                     <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                    {{ message }}
+                                 </div>
+                              {% endfor %}
+
+                          {% endif %}
+                    {% endwith %}
+
+                    <div class="form-group">
+                        <label for="projectName" class="control-label col-md-3">项目名称</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="projectName" name="projectName" value="">
+                            <input type="hidden" rowid="rowid" name="rowid" value="">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-offset-3">
+                        <input type="submit" class="btn btn-primary" value="提交">
+                        <input type="reset" class="btn btn-default" value="重置">
+                        <a href="{{ url_for("project.project_list") }}" class="btn btn-default">返回列表</a>
+                    </div>
+
+                </form>
+        	</div>
+
+        </div>
+
+    </div>
+{% endblock%}

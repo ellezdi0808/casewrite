@@ -1,0 +1,81 @@
+{% extends 'admin/layout.html' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+
+{% block page_head %}
+        <div class="page-head">
+                <h3 class="m-b-less">
+                    用例数据统计
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">用例管理</a></li>
+                        <li class="active">用例数据统计</li>
+                    </ol>
+                </div>
+    </div>
+{% endblock %}
+
+
+{% block main_content %}
+
+    <div class="row">
+        <div><span>   &nbsp;   </span></div>
+    </div>
+
+    <div class="row col-md-12">
+
+              <div class="col-lg-10 col-md-offset-1">
+                    <section class="panel">
+                        <header class="panel-heading header-section">
+                                <h4>用例数据统计</h4>
+                            </header>
+                        <table class="table">
+                            <thead>
+                            <tr class="active">
+                                <th scope="row">数据状态</th>
+                                <th>执行统计/率</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="success">
+                                <th scope="row">已处理</th>
+                                <td>{{ processed }}</td>
+
+                            </tr>
+                            <tr class="danger">
+                                <th scope="row">未处理</th>
+                                <td> {{ unprocessed }}</td>
+
+                            </tr>
+                            <tr class="warning">
+                                <th scope="row">无状态</th>
+                                <td> {{ stateless }}</td>
+
+                            </tr>
+                            <tr class="info">
+                                <th scope="row">用例总数</th>
+                                <td> {{ casecount }} </td>
+
+                            </tr>
+                            <tr class="info">
+                                <th scope="row">用例执行率</th>
+                                <td>{{ caseratio }}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+
+        </div>
+
+
+
+
+{% endblock%}

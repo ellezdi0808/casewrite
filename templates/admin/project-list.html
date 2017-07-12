@@ -1,0 +1,79 @@
+{% extends 'admin/layout.html' %}
+{% import 'admin/paginate.html' as paginate %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block page_head %}
+    <div class="page-head">
+                <h3 class="m-b-less">
+                    项目列表
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">项目</a></li>
+                        <li class="active">项目列表</li>
+                    </ol>
+                </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block main_content %}
+    <div class="wrapper">
+        <div class="row">
+                        <div class="col-lg-12">
+            <section class="panel">
+            <header class="panel-heading head-border">
+                项目列表
+
+                <a href="{{ url_for("project.add_project") }}" class="btn btn-warning pull-right">添加项目</a>
+
+            </header>
+
+            <table class="table table-striped custom-table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>项目名称</th>
+
+
+                    <th class="hidden-xs">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+{#                {% for case in cases %}#}
+                {% for project in projects.items %}
+                <tr>
+
+                     <td>{{ project.id }}</td>
+                    <td>{{ project.projectName }}</td>
+
+                    <td>
+{#                        <a href="{{ url_for('case_check',id=case.id) }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>#}
+{#                        <a href="{{ url_for('case_edit',id=case.id) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>#}
+                            <a href="{{ url_for('project.project_edit',id=project.id) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+
+                        <a href="{{ url_for('project.del_project',id=project.id) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
+
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+
+
+                </tbody>
+            </table>
+            {{ paginate.render_admin_pagination(projects,'project.project_list') }}
+            </section>
+            </div>
+        </div>
+    </div>
+
+{% endblock%}

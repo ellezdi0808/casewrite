@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Sqlite (Xerial) - newcase.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="2.6">
+    <schema id="1">
+      <visible>1</visible>
+    </schema>
+    <table id="2" parent="1" name="cases"/>
+    <table id="3" parent="1" name="modules"/>
+    <table id="4" parent="1" name="projects"/>
+    <table id="5" parent="1" name="users"/>
+    <column id="6" parent="2" name="id">
+      <mandatory>1</mandatory>
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="7" parent="2" name="caseName">
+      <data-type>VARCHAR(50)(0,-1)|12</data-type>
+    </column>
+    <column id="8" parent="2" name="step">
+      <data-type>VARCHAR(200)(0,-1)|12</data-type>
+    </column>
+    <column id="9" parent="2" name="expectResult">
+      <data-type>VARCHAR(200)(0,-1)|12</data-type>
+    </column>
+    <column id="10" parent="2" name="caseExcute">
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="11" parent="2" name="writeTime">
+      <data-type>VARCHAR(0,-1)|12</data-type>
+    </column>
+    <column id="12" parent="2" name="projectId">
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="13" parent="2" name="moduleId">
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <key id="14" parent="2">
+      <columns>id)
+foreign key(&quot;projectid&quot;</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="15" parent="2" name="#FAKE_cases_2">
+      <name-surrogate>1</name-surrogate>
+      <columns>projectId</columns>
+      <deferrable>1</deferrable>
+      <initially-deferred>1</initially-deferred>
+      <ref-key>projects(id)</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="16" parent="2" name="#FAKE_cases_1">
+      <name-surrogate>1</name-surrogate>
+      <columns>moduleId</columns>
+      <deferrable>1</deferrable>
+      <initially-deferred>1</initially-deferred>
+      <ref-key>modules(id)</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="17" parent="3" name="id">
+      <mandatory>1</mandatory>
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="18" parent="3" name="moduleName">
+      <data-type>VARCHAR(50)(0,-1)|12</data-type>
+    </column>
+    <column id="19" parent="3" name="projectId">
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <key id="20" parent="3">
+      <columns>id)
+foreign key(&quot;projectid&quot;</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="21" parent="3" name="#FAKE_modules_1">
+      <name-surrogate>1</name-surrogate>
+      <columns>projectId</columns>
+      <deferrable>1</deferrable>
+      <initially-deferred>1</initially-deferred>
+      <ref-key>projects(id)</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="22" parent="4" name="id">
+      <mandatory>1</mandatory>
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="23" parent="4" name="projectName">
+      <data-type>VARCHAR(50)(0,-1)|12</data-type>
+    </column>
+    <index id="24" parent="4" name="sqlite_autoindex_projects_1">
+      <name-surrogate>1</name-surrogate>
+      <columns>projectName</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="25" parent="4">
+      <columns>id)
+unique (&quot;projectname&quot;</columns>
+      <primary>1</primary>
+    </key>
+    <column id="26" parent="5" name="id">
+      <mandatory>1</mandatory>
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="27" parent="5" name="username">
+      <mandatory>1</mandatory>
+      <data-type>VARCHAR(50)(0,-1)|12</data-type>
+    </column>
+    <column id="28" parent="5" name="password">
+      <mandatory>1</mandatory>
+      <data-type>VARCHAR(50)(0,-1)|12</data-type>
+    </column>
+    <index id="29" parent="5" name="sqlite_autoindex_users_1">
+      <name-surrogate>1</name-surrogate>
+      <columns>username</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="30" parent="5">
+      <columns>id)
+unique (username</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,0 +1,469 @@
+{% extends 'admin/layout.html' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block page_head %}
+    <div class="page-head">
+                <h3 class="m-b-less">
+                    批量添加用例
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">用例管理</a></li>
+                        <li class="active">批量添加用例</li>
+                    </ol>
+                </div>
+    </div>
+
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="panel panel-default">
+        	<div class="panel-body col-md-10 col-md-offset-1">
+                <form action="{{ url_for("case.case_batchadd") }}" method="post" class="form-horizontal" id="imform">
+              <div>
+                    <section class="panel">
+{#                        <header class="panel-heading header-section">#}
+{#                                <h4>批量添加</h4>#}
+{#                            </header>#}
+                        <table class="table" id="imtable" name="imtable">
+                            <thead>
+                                <tr class="active">
+                                    <th scope="row">项目名称</th>
+                                    <th>模块名称</th>
+                                    <th>用例名称</th>
+                                    <th>操作步骤</th>
+                                    <th>执行结果</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                               <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+                                     <tr>
+                                <td>
+                                    <select name="projectName" id="projectName" class="form-control">
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+
+                            </select>
+                                </td>
+                                <td>
+                                    <select name="module" id="module" class="form-control">
+                                    {% for module in modules %}
+                                        <option value="{{ module.id }}">{{ module.moduleName}}</option>
+
+                                    {% endfor %}
+
+                            </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="caseName"  name="caseName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="step"  name="step">
+
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="expectResult"  name="expectResult">
+
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td class="text-center" colspan="5">
+{#                                    <button id="commitData">提交</button>#}
+                                    <a href="{{ url_for("case.case_batchadd") }}" class="btn btn-primary" id="commitData">全部提交</a>
+
+{#                                    <a href="{{ url_for("case_batchass") }}" id="commitData" class="btn btn-default" value="提交">提交</a>#}
+                                    <a href="{{ url_for("case.case_list") }}" class="btn btn-default">返回列表</a>
+
+                                </td>
+                            </tr>
+
+                            </tfoot>
+                        </table>
+                    </section>
+                </div>
+
+
+                </form>
+        	</div>
+
+        </div>
+
+    </div>
+{% endblock%}
+
+{% block scripts %}
+    <script>
+        function tableToJson() {
+            var array = [];
+
+            $("#imtable tr").each(function (index,value) {
+                var json = {};
+                if(index != 0) {
+
+                    $(this).find("input,select").each(function () {
+                            json[$(this).attr("name")] = $(this).val();
+                    });
+                        array.push(json);
+
+                };
+
+            });
+{#            console.log(JSON.stringify(array));#}
+{#            console.log(array);#}
+            return JSON.stringify(array);
+        };
+
+        $(document).ready(function(){
+
+            $('#commitData').click(function () {
+
+                var jsondata = tableToJson();
+
+                $.getJSON('/case/get-json/',{data :jsondata},function (data) {
+
+{#                    console.log(JSON.stringify(data.result));#}
+                    console.log(data.result.length);
+{#                    alert(JSON.stringify(data.result));#}
+
+                })
+
+
+{#                $.post('/case/batch/add/', {'datajson':data}, function(response){alert(response)});#}
+
+{#                $.ajax({#}
+{#                    url: '/get-json/',#}
+{#                    type: 'POST',#}
+{#                    data: {jsondata:jsdata},#}
+{#                    contentType: 'application/json;charset=UTF-8',#}
+{#                    dataType: 'json',#}
+{#                    json: "callback",#}
+{#                    success: function (data) {#}
+{#                    console.log(data.result.length);#}
+{#                    },#}
+{#                    error : function(xhr, type) {#}
+{#                    }#}
+{##}
+{#                });#}
+            });
+        });
+
+
+
+
+
+
+
+{#            function tabletojson(){#}
+{#                //easyui提交表单#}
+{#                $('#imform').form('submit');#}
+{#                //输出以数组形式序列化表单值#}
+{#                var data = $('#imform').serializeArray();#}
+{#                var obj = {};#}
+{#                $.each(data, function (i, v) {#}
+{#                    obj[v.name] = v.value;#}
+{#                });#}
+{#                var str = JSON.stringify(obj);#}
+{#                console.log(JSON.stringify(obj));#}
+{#            }#}
+
+           // 转json代码如下
+
+{#            function getTableData() {#}
+{#                var json = [];#}
+{#                var data = $("imform").serialize();#}
+{#                console.log(data);#}
+{#                      }#}
+{#                var j = 0;#}
+{#                $.each(data, function (i, field) {#}
+{#                    if (j == 0) sdata = "{";#}
+{#                    sdata +='"'+field.name+'":"'+field.value+'"';#}
+{#                    j++;#}
+{#                    if (j == 4) {#}
+{#                        sdata += "}";#}
+{#                        json.push(sdata);#}
+{#                        sdata = "";#}
+{#                        j = 0;#}
+{#                    }#}
+{#                    else#}
+{#                        sdata += ","#}
+{#                });#}
+
+
+{#                return json;					       //返回数据#}
+
+
+
+
+    </script>
+{% endblock %}

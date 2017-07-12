@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="viewport" content="width=device-width,initial-scale=1">   <!--跨屏自适应的情况下缩放比例的说明-->
+
+    <link rel="shortcut icon" href="#" type="image/png">
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <title>CODECLASSROOM.COM - boxed layout</title>
+
+    <!--right slidebar-->
+    <link href="/admin/css/slidebars.css" rel="stylesheet">
+
+    <!--switchery-->
+    <link href="/admin/js/switchery/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <link href="/admin/css/style.css" rel="stylesheet">
+    <link href="/admin/css/style-responsive.css" rel="stylesheet">
+
+    {% block stylesheets %}
+
+    {% endblock %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/admin/js/html5shiv.js"></script>
+    <script src="/admin/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="boxed-view">
+
+    <section>
+    <div class="container">
+    <!-- sidebar left start-->
+    <div class="sidebar-left">
+        <!--responsive view logo start-->
+        <div class="logo dark-logo-bg visible-xs-* visible-sm-*">
+            <a href="index.html">
+                <img src="/admin/img/logo-icon.png" alt="">
+                <!--<i class="fa fa-maxcdn"></i>-->
+                <span class="brand-name">用例管理系统</span>
+            </a>
+        </div>
+        <!--responsive view logo end-->
+
+        <div class="sidebar-left-info">
+            <!-- visible small devices start-->
+            <div class=" search-field">  </div>
+            <!-- visible small devices end-->
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked side-navigation">
+
+                <li><a href="{{ url_for("case.case_list",page=1) }}">
+                    <i class="fa fa-home"></i> <span>用例管理后台首页</span></a></li>
+
+                <li class="menu-list" id="caseManage" name="caseManage">
+{#                     nav-active#}
+                    <a href=""><i class="fa fa-laptop"></i>  <span>用例管理</span></a>
+                    <ul class="child-list">
+                        <li id="caseList" name="caseList"><a href="{{ url_for("case.case_list",page=1) }}"> 用例列表</a></li>
+                        <li id="addCase" name="addCase"><a href="{{ url_for("case.add_case") }}"> 添加用例</a></li>
+                        <li id="addCase" name="addCase"><a href="{{ url_for("case.case_batchadd") }}"> 批量添加用例</a></li>
+
+
+                    </ul>
+                </li>
+                <li class="menu-list" id="projectManage" name="projectManage">
+                    <a href=""><i class="fa fa-book"></i> <span>项目名称管理</span></a>
+                    <ul class="child-list">
+                        <li id="addProject" name="addProject"><a href="{{ url_for("project.add_project") }}"> 添加项目</a></li>
+
+                        <li id="projectList" name="projectList"><a href="{{ url_for("project.project_list") }}"> 项目列表</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-list" id="moduleManage" name="moduleManage">
+                    <a href=""><i class="fa fa-book"></i> <span>模块名称管理</span></a>
+                    <ul class="child-list">
+
+                        <li id="addModule" name="addModule"><a href="{{ url_for("module.add_module") }}"> 添加模块</a></li>
+                        <li id="moduleList" name="moduleList"><a href="{{ url_for("module.module_list") }}"> 模块列表</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href="javascript:;"><i class="fa fa-th-list"></i> <span>用例执行统计</span></a>
+                    <ul class="child-list">
+                        <li id="caseExcute" name="caseExcute"><a href="{{ url_for("case.case_excute") }}"> 用例执行率</a></li>
+{#                        <li><a href="table-dynamic.html"> Advanced Table</a></li>#}
+                    </ul>
+                </li>
+
+
+            </ul>
+            <!--sidebar nav end-->
+
+            <!--sidebar widget start-->
+
+            <!--sidebar widget end-->
+
+        </div>
+    </div>
+    <!-- sidebar left end-->
+
+    <!-- body content start-->
+    <div class="body-content" style="min-height: 1100px;">
+
+    <!-- header section start-->
+    <div class="header-section">
+
+    <!--logo and logo icon start-->
+    <div class="logo dark-logo-bg hidden-xs hidden-sm">
+        <a href="index.html">
+            <img src="/admin/img/logo-icon.png" alt="">
+            <!--<i class="fa fa-maxcdn"></i>-->
+            <span class="brand-name">SlickLab</span>
+        </a>
+    </div>
+
+    <div class="icon-logo dark-logo-bg hidden-xs hidden-sm">
+        <a href="index.html">
+            <img src="/admin/img/logo-icon.png" alt="">
+            <!--<i class="fa fa-maxcdn"></i>-->
+        </a>
+    </div>
+    <!--logo and logo icon end-->
+
+    <!--toggle button start-->
+    <a class="toggle-btn"><i class="fa fa-outdent"></i></a>
+    <!--toggle button end-->
+
+    <div class="notification-wrap">
+    <!--left notification start-->
+    <div class="left-notification">
+    <ul class="notification-menu">
+    <!--mail info start-->
+    <!--mail info end-->
+
+    <!--task info start-->
+
+    <!--task info end-->
+
+    <!--notification info start-->
+    <!--notification info end-->
+    </ul>
+    </div>
+    <!--left notification end-->
+
+
+    <!--right notification start-->
+    <div class="right-notification">
+                    <ul class="notification-menu">
+{#                        <li>#}
+{#                            <form class="search-content" action="index.html" method="post">#}
+{#                                <input type="text" class="form-control" name="keyword" placeholder="Search...">#}
+{#                            </form>#}
+{#                        </li>#}
+
+                        <li>
+                            <a href="javascript:;" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <img src="/admin/img/avatar-mini.jpg" alt="">管理员：{{ session['admin'] if session['admin'] else '未登录' }}
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu purple pull-right">
+                                <li><a href="{{ url_for("account.personal_information") }}"><i class="fa fa-sign-out pull-right"></i> 用户中心</a></li>
+                                <li><a href="{{ url_for("account.logout") }}"><i class="fa fa-sign-out pull-right"></i> 退出登录</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+        </div>
+    <!--right notification end-->
+    </div>
+
+    </div>
+    <!-- header section end-->
+{% block page_head %}
+    <!-- page head start-->
+    <div class="page-head">
+        <h3>
+            Dashboard
+        </h3>
+        <span class="sub-title">Welcome to SlickLab dashboard</span>
+        <div class="state-information">
+            <div class="state-graph">
+                <div id="balance" class="chart"></div>
+                <div class="info">Balance $ 2,317</div>
+            </div>
+            <div class="state-graph">
+                <div id="item-sold" class="chart"></div>
+                <div class="info">Item Sold 1230</div>
+            </div>
+        </div>
+    </div>
+    <!-- page head end-->
+{% endblock %}
+    <!--body wrapper start-->
+
+{% block main_content %}
+
+
+{% endblock %}
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/admin/js/jquery-1.10.2.min.js"></script>
+<script src="/admin/js/jquery-migrate.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/modernizr.min.js"></script>
+
+<!--Nice Scroll-->
+<script src="/admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+<!--right slidebar-->
+<script src="/admin/js/slidebars.min.js"></script>
+
+<!--switchery-->
+<script src="/admin/js/switchery/switchery.min.js"></script>
+<script src="/admin/js/switchery/switchery-init.js"></script>
+
+<!--Sparkline Chart-->
+<script src="/admin/js/sparkline/jquery.sparkline.js"></script>
+<script src="/admin/js/sparkline/sparkline-init.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="/admin/js/scripts.js"></script>
+
+{% block scripts %}
+    <script>
+{#       $(document).ready(function ()mouseenter {#}
+    $(function(){
+            $(".menu-list").mouseenter(function () {
+                $(this).removeClass();
+                $(this).addClass("menu-list nav-active");
+{#                $(this).attr("class", "menu-list nav-active");#}
+              });
+        });
+
+</script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends 'admin/layout.html' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block page_head %}
+    <div class="page-head">
+                <h3 class="m-b-less">
+                    查看用例
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">用例管理</a></li>
+                        <li class="active">查看用例</li>
+                    </ol>
+                </div>
+    </div>
+
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="row">
+        <div class="panel panel-default">
+        	<div class="panel-body col-md-8">
+                <form action="#" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="projectName" class="control-label col-md-2">项目名称</label>
+                        <div class="col-md-6">
+                            <select name="projectName" id="projectName" class="form-control" disabled="disabled">
+                                {% for project in projects %}
+                                    <option disabled="true" {{ 'selected=selected' if project.id==case.projectId else ''}} value="{{ project.id }}">{{ project.projectName}}</option>
+
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                        <label for="module" class="control-label col-md-2">所属模块</label>
+                        <div class="col-md-6">
+                            <select name="module" id="module" class="form-control" disabled="true">
+                                {% for module in modules %}
+                                    <option disabled="true" {{ 'selected=selected' if module.id==case.moduleId else ''}} value="{{ module.id }}">{{ module.moduleName }}</option>
+
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="caseName" class="control-label col-md-2">用例名称</label>
+                        <div class="col-md-10">
+                            <input disabled="true" "type="text" class="form-control" id="caseName" name="caseName" value="{{ case.caseName }}">
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="step" class="control-label col-md-2">操作步骤</label>
+                        <div class="col-md-10">
+                            <textarea readonly="true" name="step" id="step" cols="30" rows="10" class="form-control">{{ case.step }}</textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="expectResult" class="control-label col-md-2">期望结果</label>
+                          <div class="col-md-10">
+                            <textarea disabled="disabled" name="expectResult" id="expectResult" cols="30" rows="10" class="form-control">{{ case.expectResult }}</textarea>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="caseExcute" class="control-label col-md-2">执行</label>
+                        <div class="col-md-6">
+                            <input disabled="disabled" type="checkbox" name="caseExcute" id="caseExcute" {{ 'checked=checked' if case.caseExcute=="pass" else ''}}>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="writeTime" class="control-label col-md-2">编写时间</label>
+                        <div class="col-md-6">
+                            <input disabled="disabled" type="text" name="writeTime" id="writeTime" class="form-control" value="{{ case.writeTime }}">
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2">
+
+                        <a href="{{ url_for("case.case_list") }}" class="btn btn-default">返回列表</a>
+                    </div>
+                </form>
+        	</div>
+
+        </div>
+
+    </div>
+{% endblock%}

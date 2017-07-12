@@ -1,0 +1,72 @@
+{% extends 'admin/layout.html' %}
+{% import 'admin/paginate.html' as pagi %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block page_head %}
+    <div class="page-head">
+                <h3 class="m-b-less">
+                    模块列表
+                </h3>
+                <!--<span class="sub-title">Welcome to Static Table</span>-->
+                <div class="state-information">
+                    <ol class="breadcrumb m-b-less bg-less">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">模块</a></li>
+                        <li class="active">模块列表</li>
+                    </ol>
+                </div>
+    </div>
+
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+            <section class="panel">
+            <header class="panel-heading head-border">
+                模块列表
+                <a href="{{ url_for("module.add_module") }}" class="btn btn-warning pull-right">添加模块</a>
+
+            </header>
+            <table class="table table-striped custom-table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>项目名称</th>
+                    <th class="hidden-xs">模块名称</th>
+                  
+                    <th class="hidden-xs">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for module in modules.items %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ projects[module.projectId] if projects[module.projectId] else "没有项目名称" }}</td>
+                    <td>{{ module.moduleName if module.moduleName else "没有模块名称"}}</td>
+                    <td>
+
+            {#  <a href="{{ url_for('case_check',id=case.id) }}"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button></a>#}
+            {#  <a href="{{ url_for('del_module',id=module.id) }}"></a>#}
+                        <a href="{{ url_for('module.module_edit',id=module.id) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                        <a href="{{ url_for('module.del_module',id=module.id) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
+
+
+
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+            {{ pagi.render_admin_pagination(modules,'module.module_list') }}
+            </section>
+            </div>
+        </div>
+    </div>
+{% endblock%}

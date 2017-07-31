@@ -1,7 +1,7 @@
 编程环境： python3.5.2
 
 
-登录账号： user： test  passWord：123456   
+登录账号： user： test01  passWord：111111   
 
           user: admin  password :admin
           

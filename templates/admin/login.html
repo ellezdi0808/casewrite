@@ -28,18 +28,24 @@
       <div class="container log-row">
           <form class="form-signin" action="{{ url_for("account.login") }}" method="post">
               <div class="login-wrap">
-                                   {% with messages = get_flashed_messages() %}
-                          {% if messages %}
-
-                              {% for message in messages %}
-                                 <div class="alert alert-warning">
-                                     <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                    {{ message }}
-                                 </div>
-                              {% endfor %}
-
-                          {% endif %}
-                    {% endwith %}
+{#                  {% with messages = get_flashed_messages() %}#}
+{#                          {% if messages %}#}
+{##}
+{#                              {% for message in messages %}#}
+{#                                 <div class="alert alert-warning">#}
+{#                                     <a href="#" class="close" data-dismiss="alert">&times;</a>#}
+{#                                    {{ message }}#}
+{#                                 </div>#}
+{#                              {% endfor %}#}
+{##}
+{#                          {% endif %}#}
+{#                    {% endwith %}#}
+                               {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
                   <input type="text" class="form-control" placeholder="User Name" name="username"autofocus>
                   <input type="password" class="form-control" placeholder="Password" name="password">
                     <label class="checkbox-custom check-success">

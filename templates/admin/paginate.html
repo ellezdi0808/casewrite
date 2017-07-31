@@ -17,11 +17,11 @@
             {% if page %}
 
                {% if page != pagination.page %}
-                   {#  当前页码不等于 pagination.page 分页对象的page   #}
+                   {#  遍历到的当前页码不等于 pagination.page 是正在翻页的页码   #}
                    <li><a href="{{ url_for(endpoint,page=page) }}">{{ page }}</a></li>
                {% else %}
                    <li class="active"><a href="{{ url_for(endpoint,page=page) }}">{{ page }}</a></li>
-
+                    {#  当前页的超链接可以不要了，因为本身就在你要去的页面上#}
                 {% endif %}
             {% else %}
                 <li class="disabled"><a href="">...</a></li>

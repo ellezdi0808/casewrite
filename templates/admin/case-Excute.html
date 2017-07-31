@@ -32,7 +32,8 @@
               <div class="col-lg-10 col-md-offset-1">
                     <section class="panel">
                         <header class="panel-heading header-section">
-                                <h4>用例数据统计</h4>
+                                <h4>{{ user }}用例数据统计</h4>
+
                             </header>
                         <table class="table">
                             <thead>
@@ -58,16 +59,26 @@
                                 <td> {{ stateless }}</td>
 
                             </tr>
-                            <tr class="info">
+                            {% for proval in provalue %}
+                                <tr class="info">
+                                    <th scope="row">{{ proval }}</th>
+                                    <td>{{ provalue[proval] }}</td>
+
+                                </tr>
+                            {% endfor %}
+                            <tr style="background-color: #ce8483">
                                 <th scope="row">用例总数</th>
                                 <td> {{ casecount }} </td>
 
                             </tr>
-                            <tr class="info">
+                            <tr style="background-color: #4c98c4">
                                 <th scope="row">用例执行率</th>
                                 <td>{{ caseratio }}</td>
 
                             </tr>
+                            
+
+                            
                             </tbody>
                         </table>
                     </section>

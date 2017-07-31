@@ -50,6 +50,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="email" class="col-lg-2 col-sm-2 control-label">Email</label>
+                        <div class="col-lg-7">
+                            <input type="email" class="form-control" id="email" placeholder="Email" value="{{ email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile" class="col-lg-2 col-sm-2 control-label">Mobile</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" id="mobile" placeholder="Mobile" value="{{ mobile }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
 {#                            <button type="submit" class="btn btn-primary">提交修改</button>#}
                         <a href="{{ url_for("case.case_list") }}" class="btn btn-success">返回列表</a>

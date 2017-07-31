@@ -3,10 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from datetime import datetime, timedelta
-from account import account
-from case import case
-from project import project
-from module import module
+from makedb import db
+
 # datetime 描述当前日期时间，   timedelta 描述时间片段
 import sqlite3,json,time
 
@@ -16,10 +14,7 @@ app.debug = True
 # __name__站点根目录以这个文件的目录为界限
 
 
-
-
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db/newcase.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db/getcase.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -27,10 +22,15 @@ app.secret_key = "alisa.com"
 # session 是靠cookie实现的，cookie是存在本地硬盘的一小段文本信息，存在本地硬盘就会有可能被人篡改
 # 加了 app.secret_key安全码 就相当于加密解密有了秘钥，这个猜不到，别人就没有办法篡改你的cookie
 
-DATABASE_URL = r'./db/newcase.db'
+DATABASE_URL = r'./db/case.db'
 
-db = SQLAlchemy(app)  # 数据库核心对象
+# db = SQLAlchemy(app)  # 数据库核心对象
 db.init_app(app)  # 把app 和db关联起来
+
+from account import account
+from case import case
+from project import project
+from module import module
 
 
 app.register_blueprint(account,url_prefix="/account")

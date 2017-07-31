@@ -54,12 +54,12 @@
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked side-navigation">
 
-                <li><a href="{{ url_for("case.case_list",page=1) }}">
+                <li><a href="{{ url_for("case.homePage",page=1) }}">
                     <i class="fa fa-home"></i> <span>用例管理后台首页</span></a></li>
 
                 <li class="menu-list" id="caseManage" name="caseManage">
 {#                     nav-active#}
-                    <a href=""><i class="fa fa-laptop"></i>  <span>用例管理</span></a>
+                    <a href="{{ url_for("case.case_list",page=1) }}"><i class="fa fa-laptop"></i>  <span>用例管理</span></a>
                     <ul class="child-list">
                         <li id="caseList" name="caseList"><a href="{{ url_for("case.case_list",page=1) }}"> 用例列表</a></li>
                         <li id="addCase" name="addCase"><a href="{{ url_for("case.add_case") }}"> 添加用例</a></li>
@@ -69,7 +69,7 @@
                     </ul>
                 </li>
                 <li class="menu-list" id="projectManage" name="projectManage">
-                    <a href=""><i class="fa fa-book"></i> <span>项目名称管理</span></a>
+                    <a href="{{ url_for("project.project_list") }}"><i class="fa fa-book"></i> <span>项目管理</span></a>
                     <ul class="child-list">
                         <li id="addProject" name="addProject"><a href="{{ url_for("project.add_project") }}"> 添加项目</a></li>
 
@@ -78,7 +78,7 @@
                     </ul>
                 </li>
                 <li class="menu-list" id="moduleManage" name="moduleManage">
-                    <a href=""><i class="fa fa-book"></i> <span>模块名称管理</span></a>
+                    <a href="{{ url_for("module.module_list") }}"><i class="fa fa-book"></i> <span>模块管理</span></a>
                     <ul class="child-list">
 
                         <li id="addModule" name="addModule"><a href="{{ url_for("module.add_module") }}"> 添加模块</a></li>
@@ -86,7 +86,7 @@
                     </ul>
                 </li>
 
-                <li class="menu-list"><a href="javascript:;"><i class="fa fa-th-list"></i> <span>用例执行统计</span></a>
+                <li class="menu-list"><a href="{{ url_for("case.case_excute") }}"><i class="fa fa-th-list"></i> <span>用例执行统计</span></a>
                     <ul class="child-list">
                         <li id="caseExcute" name="caseExcute"><a href="{{ url_for("case.case_excute") }}"> 用例执行率</a></li>
 {#                        <li><a href="table-dynamic.html"> Advanced Table</a></li>#}
@@ -161,7 +161,7 @@
 
                         <li>
                             <a href="javascript:;" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <img src="/admin/img/avatar-mini.jpg" alt="">管理员：{{ session['admin'] if session['admin'] else '未登录' }}
+                                <img src="/admin/img/avatar-mini.jpg" alt="">{{ '管理员：' if session['admin']=="admin" else "用户：" }}{{ session['admin'] if session['admin'] else '未登录' }}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu purple pull-right">

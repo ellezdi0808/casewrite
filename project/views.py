@@ -42,7 +42,7 @@ class ProjectList(MethodView):
             return redirect(url_for('account.login'))
         else:
 
-            from case.models import caseProject
+            from case.models import caseProject,db
             projects = caseProject.query.paginate(page, per_page=6)
 
             return render_template('admin/project-list.html', projects=projects)
@@ -50,7 +50,7 @@ class ProjectList(MethodView):
 
 class ProjectEdit(MethodView):
     def get(self,id=None):
-        from case.models import CaseData, caseProject, caseModule
+        from case.models import CaseData, caseProject, caseModule,db
         if session.get('admin', None) is None:
             return redirect(url_for('account.login'))
 
@@ -66,7 +66,7 @@ class ProjectSaveEdit(MethodView):
 
         else:
 
-            from case.models import CaseData, caseProject, caseModule
+            from case.models import CaseData, caseProject, caseModule,db
 
             rowid = request.form.get("rowid", None)
             projectName = request.form.get("projectName", None)
@@ -87,7 +87,7 @@ class ProjectSaveEdit(MethodView):
 
 class ProjectDelete(MethodView):
     def get(self,id=None):
-        from case.models import CaseData, caseProject, caseModule
+        from case.models import CaseData, caseProject, caseModule,db
         if session.get('admin', None) is None:
             return redirect(url_for('account.login'))
 

@@ -21,3 +21,8 @@ case.add_url_rule('/batch/add/',view_func=CaseBatchAdd.as_view('case_batchadd'))
 case.add_url_rule('/get-json/',view_func=CaseGetJson.as_view('get_json'))
 
 
+home_page = CaseSystemHomePage.as_view('homePage')
+
+case.add_url_rule('/homepage/',view_func=home_page)
+case.add_url_rule('/homepage/<int:page>/',view_func=home_page)
+

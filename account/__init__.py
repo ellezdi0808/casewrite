@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint,flash,get_flashed_messages,message_flashed
 
 account = Blueprint('account',__name__)
 #Blueprint  new 一个实例,article是终结点，链接从article开始

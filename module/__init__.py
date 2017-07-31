@@ -1,5 +1,5 @@
 from flask import Blueprint
-from case.models import *
+from case.models import db
 module = Blueprint('module',__name__)
 #Blueprint  new 一个实例,article是终结点，链接从article开始
 

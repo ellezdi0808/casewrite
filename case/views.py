@@ -32,12 +32,21 @@ class CaseList(MethodView):
 
         else:
             key = request.args.get('key', '')
-            from case.models import CaseData, caseProject, caseModule
+            from case.models import CaseData, caseProject, caseModule,User
 
-            getCaseNum = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).all()
+            username = session['admin']
+            userid = User.query.filter(User.username == username).first()
+
+            if username == "admin":
+                getCaseNum = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).all()
+                cases = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).paginate(page, per_page=5)
+
+            else:
+                getCaseNum = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key)),CaseData.userId == userid.id).all()
+                cases = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key)),CaseData.userId == userid.id).paginate(page, per_page=5)
+
             lenCase = len(getCaseNum)
 
-            cases = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).paginate(page, per_page=5)
             names = db.session.query(caseProject).join(CaseData, caseProject.id == CaseData.projectId).all()
             modules = db.session.query(caseModule).join(CaseData, caseModule.id == CaseData.moduleId).all()
 
@@ -78,6 +87,7 @@ class CaseAdd(MethodView):
             return redirect(url_for('account.login'))
 
         else:
+
             from case.models import CaseData, caseProject, caseModule
 
             projects = db.session.query(caseProject).all()
@@ -90,12 +100,17 @@ class CaseAdd(MethodView):
             expectResult = request.form.get("expectResult", None)
             writeTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             caseExcute = request.form.get("caseExcute", None)
+
+            username = session['admin']
+            userid = User.query.filter(User.username == username).first()
+
             if caseExcute == "on":
                 caseExcute = 1
             else:
                 caseExcute = 0
 
-            case = CaseData(projectName, moduleName, caseName, step, expectResult, caseExcute, writeTime)
+
+            case = CaseData(projectName, moduleName, caseName, step, expectResult, caseExcute,userid.id, writeTime)
             db.session.add(case)
             db.session.commit()
 
@@ -222,28 +237,67 @@ class CaseSaveEdit(MethodView):
 class CaseExcute(MethodView):
 
     def get(self):
-        from case.models import CaseData
+        from case.models import CaseData,caseProject
 
         if session.get('admin', None) is None:
             return redirect(url_for('account.login'))
+
         else:
+            user = session['admin']
+            uservalue = db.session.query(User).filter(User.username == user).first()
 
-            processed = db.session.query(CaseData).filter(CaseData.caseExcute == 1).all()
-            processed = len(processed)
+            if user == "admin":
+                processed = db.session.query(CaseData).filter(CaseData.caseExcute == 1).all()
+                processed = len(processed)
+
+                unprocessed = db.session.query(CaseData).filter(CaseData.caseExcute ==0).all()
+                unprocessed = len(unprocessed)
+
+                stateless = db.session.query(CaseData).filter(CaseData.caseExcute != 1,CaseData.caseExcute !=0).all()
+                stateless = len(stateless)
+
+                casecount = db.session.query(CaseData).all()
+                casecount = len(casecount)
+
+                caseratio =  round(processed/casecount,2)
+
+                project = db.session.query(caseProject).all()
+
+                provalue = {}
+                for pro in project:
+                    pronum = db.session.query(CaseData).filter(CaseData.projectId == pro.id).all()
+                    pronum = len(pronum)
+                    provalue[pro.projectName] = pronum
+
+            else:
+                processed = db.session.query(CaseData).filter(CaseData.caseExcute == 1,CaseData.userId == uservalue.id).all()
+                processed = len(processed)
+
+                unprocessed = db.session.query(CaseData).filter(CaseData.caseExcute == 0,CaseData.userId == uservalue.id).all()
+                unprocessed = len(unprocessed)
+
+                stateless = db.session.query(CaseData).filter(CaseData.caseExcute != 1, CaseData.caseExcute != 0,CaseData.userId == uservalue.id).all()
+                stateless = len(stateless)
+
+                casecount = db.session.query(CaseData).filter(CaseData.userId == uservalue.id).all()
+                casecount = len(casecount)
+
+                caseratio = round(processed / casecount, 2)
+
+                project = db.session.query(caseProject).all()
+
+                provalue = {}
+                for pro in project:
+                    pronum = db.session.query(CaseData).filter(CaseData.userId == uservalue.id,CaseData.projectId == pro.id).all()
+                    pronum = len(pronum)
+                    provalue[pro.projectName] = pronum
 
 
-            unprocessed = db.session.query(CaseData).filter(CaseData.caseExcute ==0).all()
-            unprocessed = len(unprocessed)
 
-            stateless = db.session.query(CaseData).filter(CaseData.caseExcute != 1,CaseData.caseExcute !=0).all()
-            stateless = len(stateless)
+            if user == "admin":
+                user = "所有用户"
 
-            casecount = db.session.query(CaseData).all()
-            casecount = len(casecount)
-
-            caseratio =  round(processed/casecount,2)
-
-            return render_template('admin/case-Excute.html',caseratio=caseratio,casecount=casecount,processed=processed,unprocessed=unprocessed,stateless=stateless)
+            return render_template('admin/case-Excute.html',provalue=provalue,user=user,caseratio=caseratio,casecount=casecount,processed=processed,unprocessed=unprocessed,stateless=stateless)
 
 
 class CaseBatchAdd(MethodView):
@@ -261,11 +315,17 @@ class CaseGetJson(MethodView):
 
         data = json.loads(request.args.get('data'))
 
+        username = session['admin']
+        userid = User.query.filter(User.username == username).first()
+
         for d in data:
             if d.get("caseName"):
                 writeTime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 caseExcute = 0
-                case = CaseData(d['projectName'], d['module'], d['caseName'], d['step'], d['expectResult'], caseExcute,
+
+                # case = CaseData(projectName, moduleName, caseName, step, expectResult, caseExcute, userid.id, writeTime)
+
+                case = CaseData(d['projectName'], d['module'], d['caseName'], d['step'], d['expectResult'], caseExcute,userid.id,
                                 writeTime)
                 db.session.add(case)
             else:
@@ -273,3 +333,40 @@ class CaseGetJson(MethodView):
         db.session.commit()
 
         return jsonify(result=data)
+
+
+class CaseSystemHomePage(MethodView):
+    def get(self,page=1):
+
+        if session.get('admin', None) is None:
+            return redirect(url_for('account.login'))
+
+        else:
+            key = request.args.get('key', '')
+            from case.models import CaseData, caseProject, caseModule,User
+
+            username = session['admin']
+            userid = User.query.filter(User.username == username).first()
+
+            getCaseNum = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).all()
+            cases = CaseData.query.filter(CaseData.caseName.like('%{}%'.format(key))).paginate(page, per_page=5)
+
+            lenCase = len(getCaseNum)
+
+            names = db.session.query(caseProject).join(CaseData, caseProject.id == CaseData.projectId).all()
+            modules = db.session.query(caseModule).join(CaseData, caseModule.id == CaseData.moduleId).all()
+
+            proectNames = {}
+            for name in names:
+                proectNames[name.id] = name.projectName
+
+            moduleNames = {}
+
+            for module in modules:
+                moduleNames[module.id] = module.moduleName
+            # return str(cases)
+            return render_template('admin/homePage.html', key=key, cases=cases, proectNames=proectNames,
+                                   moduleNames=moduleNames, lenCase=lenCase,userid=userid)
+
+    def post(self):
+        pass

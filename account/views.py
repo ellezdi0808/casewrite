@@ -4,6 +4,7 @@ from flask import Blueprint
 # from account import account
 from case.models import *
 from datetime import datetime, timedelta
+import time,flask
 
 
 
@@ -42,7 +43,7 @@ class AccountLogin(MethodView):
         return render_template('admin/login.html')
 
     def post(self):
-        name = request.cookies.get("username")
+        # name = request.cookies.get("username")
 
         username = request.form.get('username',None)
         password = request.form.get('password',None)
@@ -68,8 +69,18 @@ class AccountLogin(MethodView):
         elif len(user) == 0:
 
             flash('用户名不存在')
+            return redirect(url_for('account.login'))
+        elif username is None:
+            flash('请输入用户名')
+            return redirect(url_for('account.login'))
+
+        elif password is None:
+            flash("请输入密码")
+            return redirect(url_for('account.login'))
+
         else:
             flash('密码输入错误')
+            return redirect(url_for('account.login'))
 
 
 class AccountLogout(MethodView):
@@ -98,7 +109,7 @@ class AccountLogout(MethodView):
 
 
 class AccountReg(MethodView):
-    from case.models import User
+    # from case.models import User
 
     def get(self):
         return render_template('admin/reg.html')
@@ -107,17 +118,30 @@ class AccountReg(MethodView):
 
         username = request.form.get('username',None)
         password = request.form.get('password',None)
+        email = request.form.get("email",None)
+        mobile = request.form.get("mobile",None)
+        createTime = datetime.now()
+
+        permission = 1
 
         user = db.session.query(User).filter(User.username == '{}'.format(username)).all()
-        if len(user) > 0:
+
+        if username is "":
+            flash("用户名不能为空")
+            return render_template('admin/reg.html')
+        elif password is "":
+            flash("密码不能为空")
+            return render_template('admin/reg.html')
+
+        elif len(user) > 0:
             flash("用户名已经存在")
-            return redirect(url_for('account.reg'))
-        user = User(username,password)
-        db.session.add(user)
-        db.session.commit()
+            return render_template('admin/reg.html')
 
-        return redirect(url_for('account.login'))
-
+        else:
+            user = User(username,password,email,mobile,permission,createTime)
+            db.session.add(user)
+            db.session.commit()
+            return render_template('admin/login.html')
 
 
 class PersonalInformation(MethodView):
@@ -131,8 +155,13 @@ class PersonalInformation(MethodView):
 
             name = session['admin']
 
-            pwd = db.session.query(User).filter(User.username == name).one()
+            uservalue = db.session.query(User).filter(User.username == name).first()
 
-            pwd = pwd.password
+            pwd = uservalue.password
 
-            return render_template('admin/per-info.html', name=name, pwd=pwd)
+            email = uservalue.email
+
+            mobile = uservalue.mobile
+
+            return render_template('admin/per-info.html', name=name, pwd=pwd,email=email,mobile=mobile)
+

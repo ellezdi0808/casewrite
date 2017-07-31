@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, session, make_response, requ
 from flask.views import View, MethodView  # view 是基类
 from flask import Blueprint
 from case.models import *
+from makedb import db
 from datetime import datetime, timedelta
 import time, json
 

@@ -7,7 +7,7 @@
           
 下载到本地的登录地址：http://127.0.0.1:5000/account/login/
 
-外网访问地址 ：http://101.201.65.92:5000/account/login/
+外网访问地址 ：http://alisa.fun:5000/account/login/
 
 
 

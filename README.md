@@ -7,8 +7,7 @@
           
 下载到本地的登录地址：http://127.0.0.1:5000/account/login/
 
-外网访问地址 ：http://alisa.fun:5000/account/login/
-
+外网访问地址 ：http://101.201.65.92/account/login/
 
 
 网站启动：首先你要对python flask 有一些了解。代码down到本地之后，启动run.py文件就可以。最好有一个编辑器，用编辑器打开项目。
